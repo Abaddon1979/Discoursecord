@@ -1,0 +1,274 @@
+// User Groups Injector Plugin Styles
+// This file contains styles for user group indicators and custom colors
+
+// Base styles for group indicators
+.chat-message-info__username,
+a[data-user-card],
+.avatar[data-user-card] {
+  // Smooth transitions for color changes
+  transition: color 0.3s ease, border-color 0.3s ease;
+  
+  // Group-specific styles will be added dynamically
+}
+
+// Default group styles (these can be overridden by admin settings)
+.is-staff {
+  // Staff group indicator
+  font-weight: 600;
+}
+
+.is-admin {
+  // Admin group indicator
+  font-weight: 700;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+.is-moderator {
+  // Moderator group indicator
+  font-weight: 600;
+}
+
+.is-trust-level-1,
+.is-tl1 {
+  // Trust level 1
+}
+
+.is-trust-level-2,
+.is-tl2 {
+  // Trust level 2
+}
+
+.is-trust-level-3,
+.is-tl3 {
+  // Trust level 3
+}
+
+.is-trust-level-4,
+.is-tl4 {
+  // Trust level 4
+}
+
+.is-vip {
+  // VIP group indicator
+  font-weight: 600;
+}
+
+.is-patron {
+  // Patron group indicator
+}
+
+.is-contributor {
+  // Contributor group indicator
+}
+
+.is-developer {
+  // Developer group indicator
+  font-family: 'Courier New', monospace;
+}
+
+.is-designer {
+  // Designer group indicator
+}
+
+// Chat message specific styles
+.chat-message-info__username {
+  position: relative;
+  
+  // Add small indicators for groups
+  &.is-admin::after {
+    content: "👑";
+    margin-left: 4px;
+    font-size: 0.8em;
+  }
+  
+  &.is-moderator::after {
+    content: "🛡️";
+    margin-left: 4px;
+    font-size: 0.8em;
+  }
+  
+  &.is-staff::after {
+    content: "⭐";
+    margin-left: 4px;
+    font-size: 0.8em;
+  }
+}
+
+// User link specific styles
+a[data-user-card] {
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+  
+  // Add subtle background for group indicators
+  &.is-admin,
+  &.is-moderator,
+  &.is-staff {
+    padding: 1px 4px;
+    border-radius: 3px;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+// Avatar specific styles
+.avatar[data-user-card] {
+  box-sizing: border-box;
+  
+  // Ensure border doesn't break layout
+  &:not(.size-large) {
+    border-radius: 50%;
+  }
+  
+  &.size-large {
+    border-radius: 8%;
+  }
+}
+
+// Dark theme adjustments
+.discourse-dark-theme,
+.ember-application.is-dark-theme {
+  .chat-message-info__username,
+  a[data-user-card] {
+    // Reduce intensity of colors in dark theme
+    filter: brightness(1.1);
+  }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  .chat-message-info__username,
+  a[data-user-card] {
+    border-bottom: 2px solid currentColor;
+  }
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .chat-message-info__username,
+  a[data-user-card],
+  .avatar[data-user-card] {
+    transition: none;
+  }
+}
+
+// Print styles
+@media print {
+  .chat-message-info__username::after,
+  a[data-user-card]::after {
+    // Hide emoji indicators in print
+    display: none;
+  }
+}
+
+// Mobile responsive adjustments
+@media (max-width: 768px) {
+  .chat-message-info__username::after {
+    font-size: 0.7em;
+    margin-left: 2px;
+  }
+  
+  a[data-user-card] {
+    padding: 0 2px;
+  }
+}
+
+// Tooltip styles for group information
+.user-groups-tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  white-space: nowrap;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  
+  &.visible {
+    opacity: 1;
+  }
+}
+
+// Loading states
+.user-groups-loading {
+  opacity: 0.6;
+  
+  &::after {
+    content: "...";
+    animation: loading-dots 1.5s infinite;
+  }
+}
+
+@keyframes loading-dots {
+  0%, 20% { content: "."; }
+  40% { content: ".."; }
+  60%, 100% { content: "..."; }
+}
+
+// Error states
+.user-groups-error {
+  color: var(--danger-medium) !important;
+  border-color: var(--danger-medium) !important;
+}
+
+// Success states for admin actions
+.user-groups-updated {
+  animation: highlight-success 1s ease;
+}
+
+@keyframes highlight-success {
+  0% { background-color: var(--success-low); }
+  100% { background-color: transparent; }
+}
+
+// Group badge styles
+.group-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  margin: 0 2px;
+  border-radius: 12px;
+  font-size: 0.75em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+  white-space: nowrap;
+  
+  // Default background
+  background-color: var(--primary-low);
+  color: var(--primary-high);
+  
+  // Specific group styles can be added dynamically
+  &.is-admin {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  &.is-moderator {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  &.is-staff {
+    background-color: #f39c12;
+    color: white;
+  }
+}
+
+// Compact mode for chat
+.compact-chat {
+  .chat-message-info__username {
+    font-size: 0.9em;
+    
+    &::after {
+      font-size: 0.7em;
+    }
+  }
+}

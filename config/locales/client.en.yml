@@ -1,0 +1,111 @@
+en:
+  js:
+    user_groups_injector:
+      admin:
+        title: "User Groups Injector"
+        description: "Configure how user groups are displayed and colored throughout the site"
+        
+        tabs:
+          general: "General"
+          group_manager: "Group Manager"
+          preview: "Preview"
+          
+        settings:
+          enabled:
+            title: "Enable Plugin"
+            description: "Turn on/off the User Groups Injector functionality"
+            
+          group_ranking:
+            title: "Group Priority Order"
+            description: "Drag and drop to reorder groups by priority. Higher priority groups determine user colors."
+            help: "Groups at the top have higher priority. Users will be colored by their highest priority group."
+            add_group: "Add Group"
+            remove_group: "Remove"
+            
+          group_colors:
+            title: "Group Colors"
+            description: "Set custom colors for each group"
+            help: "Click on a color to change it. Use hex codes for precise colors."
+            reset_color: "Reset"
+            preset_colors: "Preset Colors"
+            
+        preview:
+          title: "Preview"
+          description: "See how your settings will look on the site"
+          sample_users: "Sample Users"
+          chat_preview: "Chat Message Preview"
+          post_preview: "Post Preview"
+          user_card_preview: "User Card Preview"
+          
+        validation:
+          required_field: "This field is required"
+          invalid_color: "Please enter a valid hex color (e.g., #FF0000)"
+          invalid_group_name: "Group name can only contain letters, numbers, hyphens, and underscores"
+          duplicate_group: "A group with this name already exists"
+          
+        actions:
+          save: "Save Settings"
+          cancel: "Cancel"
+          reset: "Reset to Defaults"
+          export: "Export Configuration"
+          import: "Import Configuration"
+          
+        messages:
+          saved: "Settings saved successfully!"
+          reset: "Settings reset to defaults"
+          import_success: "Configuration imported successfully"
+          import_error: "Failed to import configuration"
+          export_success: "Configuration exported"
+          
+        groups:
+          admin: "Admin"
+          staff: "Staff"
+          moderator: "Moderator"
+          vip: "VIP"
+          patron: "Patron"
+          contributor: "Contributor"
+          developer: "Developer"
+          designer: "Designer"
+          trust_level_1: "Trust Level 1"
+          trust_level_2: "Trust Level 2"
+          trust_level_3: "Trust Level 3"
+          trust_level_4: "Trust Level 4"
+          
+        tooltips:
+          drag_to_reorder: "Drag to reorder groups by priority"
+          click_to_edit: "Click to edit"
+          double_click_color: "Double-click to reset color"
+          preview_updates: "Preview updates automatically when you change settings"
+          
+        keyboard_shortcuts:
+          save: "Ctrl+S to save"
+          cancel: "Esc to cancel"
+          add_group: "Ctrl+N to add new group"
+          
+        accessibility:
+          group_name_label: "Group name input"
+          group_color_label: "Group color picker"
+          group_rank_label: "Group rank selector"
+          save_button_label: "Save all settings"
+          cancel_button_label: "Cancel changes"
+          
+        status:
+          enabled: "Plugin is enabled"
+          disabled: "Plugin is disabled"
+          loading: "Loading..."
+          saving: "Saving..."
+          error: "Error occurred"
+          
+        advanced:
+          title: "Advanced Settings"
+          description: "Advanced configuration options"
+          custom_css: "Custom CSS"
+          custom_js: "Custom JavaScript"
+          debug_mode: "Debug Mode"
+          
+        help:
+          title: "Help & Documentation"
+          getting_started: "Getting Started"
+          troubleshooting: "Troubleshooting"
+          api_reference: "API Reference"
+          contact_support: "Contact Support"

@@ -1,0 +1,58 @@
+en:
+  site_settings:
+    user_groups_injector_enabled:
+      title: "User Groups Injector Enabled"
+      description: "Enable the User Groups Injector plugin to inject user groups into HTML elements"
+      default: true
+    user_groups_injector_group_rankings:
+      title: "Group Rankings"
+      description: "Comma-separated list of groups in order of priority (highest first). Example: admin,staff,moderator,vip"
+      default: "admin,staff,moderator"
+    user_groups_injector_group_colors:
+      title: "Group Colors"
+      description: "JSON object mapping group names to hex colors. Example: {\"admin\":\"#e74c3c\",\"staff\":\"#f39c12\",\"moderator\":\"#3498db\"}"
+      default: '{"admin":"#e74c3c","staff":"#f39c12","moderator":"#3498db"}'
+
+  admin_js:
+    admin:
+      user_groups_injector:
+        title: "User Groups Injector"
+        description: "Configure how user groups are displayed and colored throughout the site"
+        
+        settings:
+          general:
+            title: "General Settings"
+            description: "Basic plugin configuration"
+            
+          group_ranking:
+            title: "Group Ranking"
+            description: "Set the priority order for groups. Higher ranked groups will determine the user's color."
+            help: "Enter groups as a comma-separated list, with the highest priority group first."
+            
+          group_colors:
+            title: "Group Colors"
+            description: "Assign custom colors to each group"
+            help: "Use hex color codes (e.g., #FF0000) for best results."
+            
+        group_manager:
+          title: "Group Manager"
+          add_group: "Add Group"
+          remove_group: "Remove Group"
+          group_name: "Group Name"
+          group_color: "Group Color"
+          group_rank: "Rank"
+          save_changes: "Save Changes"
+          reset_to_default: "Reset to Default"
+          
+        validation:
+          invalid_color: "Invalid color format. Use hex format like #FF0000"
+          duplicate_group: "Group already exists"
+          invalid_ranking: "Invalid ranking format"
+          
+        success:
+          settings_saved: "Settings saved successfully!"
+          groups_updated: "Group configuration updated!"
+          
+        error:
+          save_failed: "Failed to save settings. Please try again."
+          load_failed: "Failed to load settings."
