@@ -3,15 +3,12 @@ en:
     discoursecord_enabled:
       title: "Discoursecord Enabled"
       description: "Enable the Discoursecord plugin to inject user groups into HTML elements"
-      default: true
     discoursecord_group_rankings:
       title: "Group Rankings"
       description: "Comma-separated list of groups in order of priority (highest first). Example: admin,staff,moderator,vip"
-      default: "admin,staff,moderator"
     discoursecord_group_colors:
       title: "Group Colors"
       description: "JSON object mapping group names to hex colors. Example: {\"admin\":\"#e74c3c\",\"staff\":\"#f39c12\",\"moderator\":\"#3498db\"}"
-      default: '{"admin":"#e74c3c","staff":"#f39c12","moderator":"#3498db"}'
 
   admin_js:
     admin:
