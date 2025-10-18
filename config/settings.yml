@@ -1,0 +1,12 @@
+plugins:
+  discoursecord_enabled:
+    type: bool
+    default: true
+
+  discoursecord_group_rankings:
+    type: list
+    default: admin,staff,moderator
+
+  discoursecord_group_colors:
+    type: json
+    default: '{"admin":"#e74c3c","staff":"#f39c12","moderator":"#3498db"}'

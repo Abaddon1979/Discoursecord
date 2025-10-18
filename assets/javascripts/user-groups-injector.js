@@ -34,7 +34,7 @@
     // Fetch plugin settings
     async function fetchPluginSettings() {
         try {
-            const response = await fetch('/admin/site_settings/category/discoursecord.json');
+            const response = await fetch('/admin/site_settings/category/plugins.json');
             if (!response.ok) {
                 console.warn('Failed to fetch plugin settings');
                 return;
