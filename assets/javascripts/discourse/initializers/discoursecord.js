@@ -163,8 +163,9 @@ export default {
       debounceTimeout = setTimeout(injectUserGroups, 500);
     }
 
-    // Initial kick
-    setTimeout(injectUserGroups, 1000);
+    // Initial kick - run immediately and again after short delay
+    injectUserGroups();
+    setTimeout(injectUserGroups, 300);
 
     // Observe DOM changes for chat, links, avatars
     const observer = new MutationObserver((mutations) => {
