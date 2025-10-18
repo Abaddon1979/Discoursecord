@@ -6,15 +6,14 @@
 # url: https://github.com/Abaddon1979/Discoursecord
 # required_version: 2.7.0
 
+register_asset 'stylesheets/user-groups-injector.scss'
+
 enabled_site_setting :discoursecord_enabled
 
 # Admin UI entry under Plugins -> Discoursecord
 add_admin_route 'Discoursecord', 'discoursecord'
 
 after_initialize do
-  # Load the plugin's JavaScript and CSS
-  register_asset 'stylesheets/user-groups-injector.scss'
-  
   # Add user groups to serialized user data
   add_to_serializer(:basic_user, :user_groups) do
     groups =

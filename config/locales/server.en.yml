@@ -1,14 +1,8 @@
 en:
   site_settings:
-    discoursecord_enabled:
-      title: "Discoursecord Enabled"
-      description: "Enable the Discoursecord plugin to inject user groups into HTML elements"
-    discoursecord_group_rankings:
-      title: "Group Rankings"
-      description: "Comma-separated list of groups in order of priority (highest first). Example: admin,staff,moderator,vip"
-    discoursecord_group_colors:
-      title: "Group Colors"
-      description: "JSON object mapping group names to hex colors. Example: {\"admin\":\"#e74c3c\",\"staff\":\"#f39c12\",\"moderator\":\"#3498db\"}"
+    discoursecord_enabled: "Enable the Discoursecord plugin to inject user groups into HTML elements"
+    discoursecord_group_rankings: "Comma-separated list of groups in order of priority (highest first). Example: admin,staff,moderator,vip"
+    discoursecord_group_colors: "JSON object mapping group names to hex colors. Example: {\"admin\":\"#e74c3c\",\"staff\":\"#f39c12\",\"moderator\":\"#3498db\"}"
 
   admin_js:
     admin:
