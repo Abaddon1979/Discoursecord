@@ -1,4 +1,4 @@
-plugins:
+discoursecord:
   discoursecord_enabled:
     type: bool
     default: true
