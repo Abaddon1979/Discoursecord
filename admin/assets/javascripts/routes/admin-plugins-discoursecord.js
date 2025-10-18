@@ -1,12 +1,15 @@
-// Admin route: Plugins -> Discoursecord
+// Admin route: Plugins -> Discoursecord (admin bundle)
 import Route from "@ember/routing/route";
 import { ajax } from "discourse/lib/ajax";
 
 export default class AdminPluginsDiscoursecordRoute extends Route {
+  renderTemplate() {
+    this.render("admin/plugins/discoursecord", { into: "adminPlugins" });
+  }
   async model() {
     // Load current plugin settings from the plugins category
     // Fallbacks are provided if settings are not yet customized
-    const data = await ajax("/admin/site_settings/category/plugins.json");
+    const data = await ajax("/admin/site_settings/category/discoursecord.json");
     const findSetting = (name) =>
       (data.site_settings || []).find((s) => s.setting === name);
 

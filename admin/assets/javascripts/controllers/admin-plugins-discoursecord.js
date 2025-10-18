@@ -1,4 +1,4 @@
-// Admin controller: Plugins -> Discoursecord
+// Admin controller: Plugins -> Discoursecord (admin bundle)
 import Controller from "@ember/controller";
 import { action } from "@ember/object";
 import { ajax } from "discourse/lib/ajax";
@@ -12,7 +12,6 @@ export default class AdminPluginsDiscoursecordController extends Controller {
   @tracked saved = false;
   @tracked error = null;
 
-  // Model is provided by the route
   set model(value) {
     this._model = value;
     if (value) {
@@ -35,7 +34,7 @@ export default class AdminPluginsDiscoursecordController extends Controller {
   }
 
   @action
-  dragOver(idx, event) {
+  dragOver(_idx, event) {
     event.preventDefault();
   }
 
@@ -43,12 +42,8 @@ export default class AdminPluginsDiscoursecordController extends Controller {
   drop(idx, event) {
     event.preventDefault();
     const from = this.dragIndex;
-    if (from === null || from === undefined) {
-      return;
-    }
-    if (from === idx) {
-      return;
-    }
+    if (from === null || from === undefined) return;
+    if (from === idx) return;
     const arr = [...this.rankings];
     const [item] = arr.splice(from, 1);
     arr.splice(idx, 0, item);
@@ -93,9 +88,8 @@ export default class AdminPluginsDiscoursecordController extends Controller {
   @action
   removeGroup(idx) {
     const arr = [...this.rankings];
-    const [removed] = arr.splice(idx, 1);
+    arr.splice(idx, 1);
     this.rankings = arr;
-    // Keep color entry for potential later use; do not delete automatically
   }
 
   @action
@@ -111,14 +105,12 @@ export default class AdminPluginsDiscoursecordController extends Controller {
     this.saved = false;
     this.error = null;
     try {
-      // Save rankings as a comma-separated string to match our parser
       const rankingsValue = this.rankings.join(",");
       await ajax("/admin/site_settings/discoursecord_group_rankings", {
         type: "PUT",
         data: { value: rankingsValue },
       });
 
-      // Save colors as JSON string
       const colorsValue = JSON.stringify(this.colors);
       await ajax("/admin/site_settings/discoursecord_group_colors", {
         type: "PUT",
