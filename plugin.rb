@@ -17,14 +17,11 @@ after_initialize do
     object.groups.pluck(:name).map(&:downcase)
   end
 
-  # Add user groups to chat message serializer
-  add_to_serializer(:chat_message, :user_groups) do
-    if object.user
-      object.user.groups.pluck(:name).map(&:downcase)
-    else
-      []
-    end
+  # Also add to full User serializer (used by /u/:username.json)
+  add_to_serializer(:user, :user_groups) do
+    object.groups.pluck(:name).map(&:downcase)
   end
+
 
   # Add highest ranked group for coloring
   add_to_serializer(:basic_user, :highest_ranked_group) do
@@ -34,16 +31,13 @@ after_initialize do
     groups.sort_by { |group| rankings.index(group) || Float::INFINITY }.first
   end
 
-  add_to_serializer(:chat_message, :highest_ranked_group) do
-    if object.user
-      groups = object.user.groups.pluck(:name).map(&:downcase)
-      rankings = SiteSetting.discoursecord_group_rankings || []
-      
-      groups.sort_by { |group| rankings.index(group) || Float::INFINITY }.first
-    else
-      nil
-    end
+  add_to_serializer(:user, :highest_ranked_group) do
+    groups = object.groups.pluck(:name).map(&:downcase)
+    rankings = SiteSetting.discoursecord_group_rankings || []
+
+    groups.sort_by { |group| rankings.index(group) || Float::INFINITY }.first
   end
+
 
   # Add group colors to serializer
   add_to_serializer(:basic_user, :group_color) do
@@ -56,7 +50,7 @@ after_initialize do
     end
   end
 
-  add_to_serializer(:chat_message, :group_color) do
+  add_to_serializer(:user, :group_color) do
     highest_group = highest_ranked_group
     if highest_group
       colors = SiteSetting.discoursecord_group_colors || {}
@@ -65,4 +59,5 @@ after_initialize do
       nil
     end
   end
+
 end
