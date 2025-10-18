@@ -58,6 +58,15 @@ after_initialize do
         []
       end
 
+    # Normalize group names (admins -> admin, moderators -> moderator)
+    groups = groups.map do |g|
+      case g
+      when "admins" then "admin"
+      when "moderators" then "moderator"
+      else g
+      end
+    end
+
     rankings_raw = SiteSetting.discoursecord_group_rankings
     rankings =
       if rankings_raw.is_a?(Array)
@@ -76,6 +85,15 @@ after_initialize do
       else
         []
       end
+
+    # Normalize group names (admins -> admin, moderators -> moderator)
+    groups = groups.map do |g|
+      case g
+      when "admins" then "admin"
+      when "moderators" then "moderator"
+      else g
+      end
+    end
 
     rankings_raw = SiteSetting.discoursecord_group_rankings
     rankings =
