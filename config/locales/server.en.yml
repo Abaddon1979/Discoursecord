@@ -1,5 +1,45 @@
 en:
   site_settings:
     discoursecord_enabled: "Enable the Discoursecord plugin to inject user groups into HTML elements"
-    discoursecord_group_rankings: "Comma-separated list of groups in order of priority (highest first). Example: admin,staff,moderator,vip"
-    discoursecord_group_colors: "JSON object mapping group names to hex colors. Example: {\"admin\":\"#e74c3c\",\"staff\":\"#f39c12\",\"moderator\":\"#3498db\"}"
+    discoursecord_group_rankings: "Manage group rankings with up/down arrows and drag-and-drop functionality"
+    discoursecord_group_colors: "Configure group colors with interactive color pickers"
+
+  admin_js:
+    admin:
+      discoursecord:
+        title: "Discoursecord"
+        description: "Configure how user groups are displayed and colored throughout the site"
+        
+        settings:
+          general:
+            title: "Discoursecord Settings"
+            description: "Access the advanced admin interface with up/down arrows and color pickers"
+            help: "Visit /admin/plugins/discoursecord/settings to access the enhanced interface with visual controls"
+            
+          group_ranking:
+            title: "Group Ranking Manager"
+            description: "Interactive ranking with up/down arrows and drag-and-drop reordering"
+            help: "Use the Configure button for advanced group management with visual controls"
+            
+          group_colors:
+            title: "Group Color Manager"
+            description: "Interactive color selection with color pickers for each group"
+            help: "Use the Configure button for advanced color management"
+            
+        group_manager:
+          title: "Enhanced Group Manager"
+          description: "Advanced interface with up/down arrows, drag-and-drop, and color pickers"
+          configure: "Configure Groups and Colors"
+          advanced_settings: "Advanced Settings"
+          
+        actions:
+          configure: "Configure"
+          open_admin: "Open Enhanced Admin Interface"
+          manage_groups: "Manage Groups"
+          manage_colors: "Manage Colors"
+          
+        messages:
+          admin_available: "Advanced admin interface available. Click Configure to access group manager with up/down arrows and color pickers."
+          plugin_enabled: "Discoursecord plugin is enabled"
+          plugin_disabled: "Discoursecord plugin is disabled"
+          settings_link: "Access the advanced admin interface via the Configure button instead of standard settings"
