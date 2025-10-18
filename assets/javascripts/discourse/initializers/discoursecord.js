@@ -64,23 +64,30 @@ export default {
           (nameElement && nameElement.textContent && nameElement.textContent.trim());
         if (!username) continue;
 
-        // prevent reprocessing
-        if (element.dataset.groupsInjected === "true") continue;
+        // prevent duplicate class injection, but still allow recoloring inner span
+        const alreadyInjected = element.dataset.groupsInjected === "true";
 
         const userData = await fetchUserData(username);
         if (!userData) continue;
 
         const groups = userData.user_groups || [];
         // add classes like is-admin, is-staff, is-trust_level_3
-        groups.forEach((group) => {
-          element.classList.add(`is-${normalizeGroupName(group)}`);
-        });
+        if (!alreadyInjected) {
+          groups.forEach((group) => {
+            element.classList.add(`is-${normalizeGroupName(group)}`);
+          });
+        }
 
         // prefer server-provided color
         const highestGroup = getHighestRankedGroup(groups);
         const color = userData.group_color || getGroupColor(highestGroup);
         if (color) {
-          element.style.setProperty("color", color, "important");
+          // Apply specifically to inner name span if present; otherwise fallback to container
+          if (nameElement) {
+            nameElement.style.setProperty("color", color, "important");
+          } else {
+            element.style.setProperty("color", color, "important");
+          }
         }
 
         element.dataset.groupsInjected = "true";

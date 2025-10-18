@@ -8,6 +8,9 @@
 
 enabled_site_setting :discoursecord_enabled
 
+# Admin UI entry under Plugins -> Discoursecord
+add_admin_route 'Discoursecord', 'discoursecord'
+
 after_initialize do
   # Load the plugin's JavaScript and CSS
   register_asset 'stylesheets/user-groups-injector.scss'

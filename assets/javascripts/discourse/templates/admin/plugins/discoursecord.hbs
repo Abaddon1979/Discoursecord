@@ -1,0 +1,120 @@
+<section class="discoursecord-admin">
+  <h1>Discoursecord</h1>
+
+  <div class="instructions">
+    <p>Drag and drop groups to set priority. The top-most group has the highest priority and determines the user's color when they belong to multiple groups.</p>
+    <p>Use the color picker to assign a color for each group.</p>
+  </div>
+
+  {{#if this.error}}
+    <div class="alert alert-error">
+      {{this.error}}
+    </div>
+  {{/if}}
+
+  {{#if this.saved}}
+    <div class="alert alert-info">
+      Settings saved successfully.
+    </div>
+  {{/if}}
+
+  <div class="rankings">
+    <h2>Group Ranking</h2>
+    <ul class="discoursecord-group-list">
+      {{#each this.rankings as |group idx|}}
+        <li
+          class="discoursecord-group-item"
+          draggable="true"
+          {{on "dragstart" (fn this.dragStart idx)}}
+          {{on "dragover" (fn this.dragOver idx)}}
+          {{on "drop" (fn this.drop idx)}}
+        >
+          <span class="handle" title="Drag to reorder">↕</span>
+          <span class="group-key">{{group}}</span>
+
+          <input
+            class="group-color"
+            type="color"
+            value={{this.colors.[group]}}
+            {{on "input" (fn this.changeColor group)}}
+            title="Pick a color for this group"
+          />
+
+          <button type="button" class="btn btn-small" title="Move up" {{on "click" (fn this.moveUp idx)}}>▲</button>
+          <button type="button" class="btn btn-small" title="Move down" {{on "click" (fn this.moveDown idx)}}>▼</button>
+          <button type="button" class="btn btn-danger btn-small" title="Remove from list" {{on "click" (fn this.removeGroup idx)}}>Remove</button>
+        </li>
+      {{/each}}
+    </ul>
+
+    <div class="rankings-actions">
+      <button type="button" class="btn" {{on "click" this.addGroup}}>Add Group</button>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button
+      type="button"
+      class="btn btn-primary"
+      disabled={{this.saving}}
+      {{on "click" this.saveAll}}
+    >
+      {{if this.saving "Saving..." "Save Changes"}}
+    </button>
+  </div>
+</section>
+
+<style>
+  .discoursecord-admin .discoursecord-group-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .discoursecord-admin .discoursecord-group-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border: 1px solid var(--primary-low);
+    border-radius: 4px;
+    margin-bottom: 6px;
+    background: var(--secondary);
+  }
+  .discoursecord-admin .handle {
+    cursor: grab;
+    user-select: none;
+    font-weight: bold;
+    width: 18px;
+    text-align: center;
+  }
+  .discoursecord-admin .group-key {
+    flex: 1 1 auto;
+    font-family: var(--font-family);
+  }
+  .discoursecord-admin .group-color {
+    width: 40px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    background: transparent;
+  }
+  .discoursecord-admin .btn-small {
+    line-height: 1;
+    padding: 3px 6px;
+  }
+  .discoursecord-admin .rankings-actions {
+    margin-top: 8px;
+  }
+  .discoursecord-admin .alert {
+    margin: 8px 0;
+    padding: 8px 10px;
+  }
+  .discoursecord-admin .alert-error {
+    background: #ffe6e6;
+    border: 1px solid #ffb3b3;
+  }
+  .discoursecord-admin .alert-info {
+    background: #e6f7ff;
+    border: 1px solid #b3e0ff;
+  }
+</style>
