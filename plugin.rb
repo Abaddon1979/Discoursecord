@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
-name 'user-groups-injector'
 description 'Injects user groups into HTML elements with customizable colors and ranking'
 version '0.1.0'
 authors 'Your Name'
 url 'https://github.com/yourusername/user-groups-injector'
+
+# Define the plugin name method for Discourse compatibility
+def name
+  'user-groups-injector'
+end
 
 enabled_site_setting :user_groups_injector_enabled
 
