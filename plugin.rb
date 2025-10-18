@@ -1,9 +1,12 @@
 # frozen_string_literal: true
-# name: Discoursecord
+# name: discoursecord
 # about: Injects user groups into HTML elements with customizable colors and ranking
 # version: 0.1.0
 # authors: Your Name
 # url: https://github.com/Abaddon1979/Discoursecord
+# required_version: 2.7.0
+
+enabled_site_setting :discoursecord_enabled
 
 after_initialize do
   # Load the plugin's JavaScript and CSS
