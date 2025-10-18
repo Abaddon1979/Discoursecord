@@ -20,7 +20,13 @@ after_initialize do
       else
         []
       end
-    groups.map { |n| n.to_s.downcase }
+
+    # Ensure trust level group is included (e.g., trust_level_1)
+    if object.respond_to?(:trust_level) && !object.trust_level.nil?
+      groups << "trust_level_#{object.trust_level}"
+    end
+
+    groups.map { |n| n.to_s.downcase }.uniq
   end
 
   # Also add to full User serializer (used by /u/:username.json)
@@ -31,7 +37,13 @@ after_initialize do
       else
         []
       end
-    groups.map { |n| n.to_s.downcase }
+
+    # Ensure trust level group is included (e.g., trust_level_1)
+    if object.respond_to?(:trust_level) && !object.trust_level.nil?
+      groups << "trust_level_#{object.trust_level}"
+    end
+
+    groups.map { |n| n.to_s.downcase }.uniq
   end
 
 
