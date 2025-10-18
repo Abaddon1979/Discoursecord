@@ -1,11 +1,8 @@
-// Admin route: Plugins -> Discoursecord (admin bundle)
+// Admin route: Plugins -> Discoursecord
 import Route from "@ember/routing/route";
 import { ajax } from "discourse/lib/ajax";
 
 export default class AdminPluginsDiscoursecordRoute extends Route {
-  renderTemplate() {
-    this.render("admin/plugins/discoursecord", { into: "adminPlugins" });
-  }
   async model() {
     // Load current plugin settings from the plugins category
     // Fallbacks are provided if settings are not yet customized
