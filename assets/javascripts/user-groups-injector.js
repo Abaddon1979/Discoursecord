@@ -34,15 +34,15 @@
     // Fetch plugin settings
     async function fetchPluginSettings() {
         try {
-            const response = await fetch('/admin/site_settings/category/user_groups_injector.json');
+            const response = await fetch('/admin/site_settings/category/discoursecord.json');
             if (!response.ok) {
                 console.warn('Failed to fetch plugin settings');
                 return;
             }
             
             const data = await response.json();
-            const rankingSetting = data.site_settings.find(s => s.setting === 'user_groups_injector_group_rankings');
-            const colorSetting = data.site_settings.find(s => s.setting === 'user_groups_injector_group_colors');
+            const rankingSetting = data.site_settings.find(s => s.setting === 'discoursecord_group_rankings');
+            const colorSetting = data.site_settings.find(s => s.setting === 'discoursecord_group_colors');
             
             if (rankingSetting && rankingSetting.value) {
                 groupRankings = rankingSetting.value.split(',').map(g => g.trim().toLowerCase());
@@ -260,7 +260,7 @@
     }
 
     // Expose functions for debugging
-    window.UserGroupsInjector = {
+    window.Discoursecord = {
         injectUserGroups,
         fetchUserData,
         getHighestRankedGroup,

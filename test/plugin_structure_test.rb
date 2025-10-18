@@ -31,7 +31,7 @@ RSpec.describe "User Groups Injector Plugin Structure" do
     plugin_content = File.read('plugin.rb')
     
     # Check for required plugin elements
-    expect(plugin_content).to include("# name: user-groups-injector")
+    expect(plugin_content).to include("# name: Discoursecord")
     expect(plugin_content).to include("# about:")
     expect(plugin_content).to include("# version:")
     expect(plugin_content).to include("enabled_site_setting")

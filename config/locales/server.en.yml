@@ -1,22 +1,22 @@
 en:
   site_settings:
-    user_groups_injector_enabled:
-      title: "User Groups Injector Enabled"
-      description: "Enable the User Groups Injector plugin to inject user groups into HTML elements"
+    discoursecord_enabled:
+      title: "Discoursecord Enabled"
+      description: "Enable the Discoursecord plugin to inject user groups into HTML elements"
       default: true
-    user_groups_injector_group_rankings:
+    discoursecord_group_rankings:
       title: "Group Rankings"
       description: "Comma-separated list of groups in order of priority (highest first). Example: admin,staff,moderator,vip"
       default: "admin,staff,moderator"
-    user_groups_injector_group_colors:
+    discoursecord_group_colors:
       title: "Group Colors"
       description: "JSON object mapping group names to hex colors. Example: {\"admin\":\"#e74c3c\",\"staff\":\"#f39c12\",\"moderator\":\"#3498db\"}"
       default: '{"admin":"#e74c3c","staff":"#f39c12","moderator":"#3498db"}'
 
   admin_js:
     admin:
-      user_groups_injector:
-        title: "User Groups Injector"
+      discoursecord:
+        title: "Discoursecord"
         description: "Configure how user groups are displayed and colored throughout the site"
         
         settings:

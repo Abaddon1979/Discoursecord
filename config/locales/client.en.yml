@@ -1,8 +1,8 @@
 en:
   js:
-    user_groups_injector:
+    discoursecord:
       admin:
-        title: "User Groups Injector"
+        title: "Discoursecord"
         description: "Configure how user groups are displayed and colored throughout the site"
         
         tabs:
