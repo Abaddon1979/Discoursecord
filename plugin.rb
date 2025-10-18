@@ -5,8 +5,6 @@
 # authors: Your Name
 # url: https://github.com/Abaddon1979/Discoursecord
 
-enabled_site_setting :discoursecord_enabled
-
 after_initialize do
   # Load the plugin's JavaScript and CSS
   register_asset 'stylesheets/user-groups-injector.scss'
