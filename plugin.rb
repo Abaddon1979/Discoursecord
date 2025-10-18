@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-# name: discoursecord
+# name: Discoursecord
 # about: Injects user groups into HTML elements with customizable colors and ranking
 # version: 0.1.0
 # authors: Your Name
@@ -11,7 +11,6 @@ enabled_site_setting :discoursecord_enabled
 after_initialize do
   # Load the plugin's JavaScript and CSS
   register_asset 'stylesheets/user-groups-injector.scss'
-  register_asset 'javascripts/user-groups-injector.js', :head
   
   # Add user groups to serialized user data
   add_to_serializer(:basic_user, :user_groups) do
