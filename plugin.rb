@@ -11,7 +11,7 @@ register_asset 'stylesheets/user-groups-injector.scss'
 enabled_site_setting :discoursecord_enabled
 
 # Admin UI entry under Plugins -> Discoursecord
-add_admin_route 'Discoursecord', 'discoursecord'
+add_admin_route 'discoursecord', 'discoursecord'
 
 after_initialize do
   # Add user groups to serialized user data
