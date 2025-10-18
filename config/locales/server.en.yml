@@ -53,8 +53,3 @@ en:
         error:
           save_failed: "Failed to save settings. Please try again."
           load_failed: "Failed to load settings."
-
-  admin:
-    site_settings:
-      categories:
-        discoursecord: "Discoursecord"

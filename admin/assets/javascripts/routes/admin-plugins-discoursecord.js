@@ -9,7 +9,7 @@ export default class AdminPluginsDiscoursecordRoute extends Route {
   async model() {
     // Load current plugin settings from the plugins category
     // Fallbacks are provided if settings are not yet customized
-    const data = await ajax("/admin/site_settings/category/discoursecord.json");
+    const data = await ajax("/admin/site_settings/category/plugins.json");
     const findSetting = (name) =>
       (data.site_settings || []).find((s) => s.setting === name);
 
