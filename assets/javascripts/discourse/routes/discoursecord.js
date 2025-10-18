@@ -32,7 +32,7 @@ export default class DiscoursecordRoute extends Route {
       colors = {};
     }
 
-    // Ensure there is at least a reasonable default ordering if empty
+    // Ensure there is at least a reasonable default ordering if empty or fallback when site_settings not available
     if (rankings.length === 0) {
       rankings = [
         "admin",

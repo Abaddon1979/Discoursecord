@@ -1,15 +1,15 @@
-plugins:
+uncategorized:
   discoursecord_enabled:
     default: true
     client: true
-    category: "plugins"
+    description: "Enable the Discoursecord plugin with advanced admin interface featuring up/down arrows and color pickers"
 
   discoursecord_group_rankings:
-    default: "admin,staff,moderator,trust_level_4,trust_level_3,trust_level_2,trust_level_1"
+    default: ""
     client: true
-    category: "plugins"
+    description: "Use the enhanced admin interface at /admin/plugins/discoursecord/settings for up/down arrows, drag-and-drop reordering, and visual controls"
 
   discoursecord_group_colors:
-    default: '{"admin":"#e74c3c","staff":"#f39c12","moderator":"#3498db","trust_level_4":"#8e44ad","trust_level_3":"#27ae60","trust_level_2":"#16a085","trust_level_1":"#7f8c8d"}'
+    default: ""
     client: true
-    category: "plugins"
+    description: "Use the enhanced admin interface at /admin/plugins/discoursecord/settings for interactive color pickers and visual color management"
