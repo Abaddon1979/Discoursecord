@@ -4,7 +4,7 @@ login:
     client: true
   oauth2_client_id: ""
   oauth2_client_secret:
-    default: ""
+    default: "1"
     secret: true
   oauth2_authorize_url: ""
   oauth2_authorize_signup_url: ""
