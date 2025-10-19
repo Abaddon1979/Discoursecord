@@ -109,10 +109,12 @@ en:
         api_reference: "API Reference"
         contact_support: "Contact Support"
         
-      admin_interface:
-        title: "Enhanced Admin Interface"
-        description: "Advanced interface with up/down arrows for ranking and color pickers"
-        instructions: "Visit the direct URL: /admin/plugins/discoursecord/settings to access the enhanced interface with up/down arrows and drag-and-drop functionality"
-        direct_link: "Direct Link to Enhanced Interface"
-        features: "Features: up/down arrows for ranking, drag-and-drop reordering, color pickers, add/remove groups"
-        note: "The standard settings interface shows plain text fields - use the direct link above for the enhanced interface"
+        admin_interface:
+        title: "Discoursecord Admin"
+        instructions: "Manage user groups with up/down arrows for ranking and interactive color pickers"
+        description: "Enhanced interface with visual controls for group management"
+        direct_link: "Configure Groups"
+        features: "Up/down arrows for ranking, drag-and-drop reordering, color pickers, add/remove functionality"
+        settings: "Group Settings"
+        colors: "Group Colors"
+        ranking: "Group Rankings"

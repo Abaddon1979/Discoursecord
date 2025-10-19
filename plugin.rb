@@ -12,36 +12,8 @@ enabled_site_setting :discoursecord_enabled
 
 # Admin UI entry under Plugins -> Discoursecord
 add_admin_route 'discoursecord', 'discoursecord'
-
-# Custom site settings type for enhanced UI
-if defined?(SiteSetting::TYPE_TYPES)
-  SiteSetting.register_type_types("discoursecord_list", "Enhanced UI for group rankings")
-  SiteSetting.register_type_types("discoursecord_colors", "Enhanced UI for group colors")
-end
-
-# Register custom field types for the enhanced interface
-SiteSetting.register_type("discoursecord_group_rankings", "discoursecord_list")
-SiteSetting.register_type("discoursecord_group_colors", "discoursecord_colors")
-
-# Override the render method for these settings to show enhanced interface
-module ::SiteSettingExtension
-  def renderer_for(name, value)
-    if name == "discoursecord_group_rankings" || name == "discoursecord_group_colors"
-      return lambda do |setting|
-        <<~HTML
-          <div class="discoursecord-enhanced-ui">
-            <p>This setting uses the enhanced admin interface with up/down arrows and color pickers.</p>
-            <a href="/admin/plugins/discoursecord/settings" class="btn btn-primary" target="_blank">
-              Configure Groups & Colors
-            </a>
-            <p><small>Use the enhanced interface for visual management with up/down arrows for ranking and interactive color pickers.</small></p>
-          </div>
-        HTML
-      end
-    end
-    super(name, value)
-  end
-end
+# Remove standard settings from main interface to force use of custom admin
+# These settings will only be accessible through the custom admin interface
 
 after_initialize do
   # Add user groups to serialized user data

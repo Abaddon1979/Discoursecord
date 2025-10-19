@@ -3,6 +3,17 @@
 export default {
   name: "discoursecord-groups",
   initialize() {
+    // Add custom admin button to plugin interface
+    if (api.modifyClass) {
+      api.modifyClass("controller:admin-plugins", {
+        pluginId: "discoursecord-groups",
+        actions: {
+          configureDiscoursecord() {
+            this.transitionToRoute("adminPlugins.discoursecord");
+          }
+        }
+      });
+    }
     // Cache for fetched user data
     const userDataCache = new Map();
 
