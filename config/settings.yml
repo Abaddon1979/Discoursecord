@@ -1,55 +1,15 @@
-login:
-  oauth2_enabled:
-    default: false
-    client: true
-  oauth2_client_id: ""
-  oauth2_client_secret:
-    default: "1"
-    secret: true
-  oauth2_authorize_url: ""
-  oauth2_authorize_signup_url: ""
-  oauth2_token_url: ""
-  oauth2_token_url_method:
-    default: "POST"
-    type: enum
-    choices:
-      - GET
-      - POST
-      - PUT
-  oauth2_callback_user_id_path: ""
-  oauth2_callback_user_info_paths:
-    type: list
-    default: "id"
-  oauth2_fetch_user_details:
+uncategorized:
+  discoursecord_enabled:
     default: true
-    validator: "Oauth2FetchUserDetailsValidator"
-  oauth2_user_json_url: ""
-  oauth2_user_json_url_method:
-    default: "GET"
-    type: enum
-    choices:
-      - GET
-      - POST
-  oauth2_json_user_id_path: ""
-  oauth2_json_username_path: ""
-  oauth2_json_name_path: ""
-  oauth2_json_email_path: ""
-  oauth2_json_email_verified_path: ""
-  oauth2_json_avatar_path: ""
-  oauth2_email_verified: false
-  oauth2_overrides_email: false
-  oauth2_send_auth_header: true
-  oauth2_send_auth_body: true
-  oauth2_debug_auth: false
-  oauth2_authorize_options:
-    default: "scope"
-    type: list
-  oauth2_scope: ""
-  oauth2_button_title:
-    default: "with OAuth2"
     client: true
-  oauth2_allow_association_change:
-    default: false
-  oauth2_disable_csrf:
-    default: false
-    hidden: true
+    description: "Enable the Discoursecord plugin with advanced admin interface featuring up/down arrows and color pickers"
+
+  discoursecord_group_rankings:
+    default: ""
+    client: true
+    description: "Use the enhanced admin interface at /admin/plugins/discoursecord/settings for up/down arrows, drag-and-drop reordering, and visual controls"
+
+  discoursecord_group_colors:
+    default: ""
+    client: true
+    description: "Use the enhanced admin interface at /admin/plugins/discoursecord/settings for interactive color pickers and visual color management"
