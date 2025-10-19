@@ -2,7 +2,7 @@
 import Route from "@ember/routing/route";
 import { ajax } from "discourse/lib/ajax";
 
-export default class DiscoursecordRoute extends Route {
+export default class AdminPluginsDiscoursecordRoute extends Route {
   async model() {
     // Load current plugin settings from the plugins category
     // Fallbacks are provided if settings are not yet customized

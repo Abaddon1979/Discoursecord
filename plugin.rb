@@ -12,7 +12,7 @@ register_asset 'stylesheets/user-groups-injector.scss', :desktop
 enabled_site_setting :discoursecord_enabled
 
 # Admin UI entry under Plugins -> Discoursecord
-add_admin_route 'discoursecord', 'discoursecord'
+add_admin_route 'Discoursecord', 'discoursecord'
 # Remove standard settings from main interface to force use of custom admin
 # These settings will only be accessible through the custom admin interface
 

@@ -2,26 +2,7 @@
 /* eslint-disable no-console */
 export default {
   name: "discoursecord-groups",
-  initialize(container) {
-    // Add custom admin button to plugin interface using proper Discourse API
-    const api = container.lookup("service:api") || container.lookup("service:discourse");
-    if (api && api.modifyClass) {
-      api.modifyClass("controller:admin-plugins", {
-        pluginId: "discoursecord-groups",
-        actions: {
-          configureDiscoursecord() {
-            this.transitionToRoute("adminPlugins.discoursecord");
-          }
-        }
-      });
-    } else {
-      // Fallback for older Discourse versions
-      const router = container.lookup("router:main");
-      if (router) {
-        // Add the button through the admin interface
-        console.log("Discoursecord: Admin interface available at /admin/plugins/discoursecord/settings");
-      }
-    }
+  initialize() {
     // Cache for fetched user data
     const userDataCache = new Map();
 

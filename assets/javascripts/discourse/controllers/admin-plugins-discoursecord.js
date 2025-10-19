@@ -4,7 +4,7 @@ import { action } from "@ember/object";
 import { ajax } from "discourse/lib/ajax";
 import { tracked } from "@glimmer/tracking";
 
-export default class DiscoursecordController extends Controller {
+export default class AdminPluginsDiscoursecordController extends Controller {
   queryParams = [];
   @tracked rankings = [];
   @tracked colors = {};
