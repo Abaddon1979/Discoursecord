@@ -1,6 +1,40 @@
 // User Groups Injector Plugin Styles
 // This file contains styles for user group indicators and custom colors
 
+// Enhanced UI in settings
+.discoursecord-enhanced-ui {
+  padding: 15px;
+  border: 1px solid var(--primary-low);
+  border-radius: 8px;
+  background: var(--secondary-high);
+  margin: 10px 0;
+  
+  p {
+    margin: 0 0 10px 0;
+    color: var(--primary);
+  }
+  
+  .btn-primary {
+    background: var(--tertiary);
+    color: var(--secondary);
+    padding: 10px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 5px;
+    
+    &:hover {
+      background: var(--tertiary-hover);
+      transform: translateY(-1px);
+    }
+  }
+  
+  small {
+    color: var(--primary-med-or-secondary-med);
+    font-size: 0.9em;
+  }
+}
+
 // Base styles for group indicators
 .chat-message-info__username,
 a[data-user-card],
