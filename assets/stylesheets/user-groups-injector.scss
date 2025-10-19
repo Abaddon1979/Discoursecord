@@ -1,37 +1,77 @@
 // User Groups Injector Plugin Styles
 // This file contains styles for user group indicators and custom colors
 
-// Enhanced UI in settings
-.discoursecord-enhanced-ui {
-  padding: 15px;
-  border: 1px solid var(--primary-low);
-  border-radius: 8px;
-  background: var(--secondary-high);
-  margin: 10px 0;
-  
-  p {
-    margin: 0 0 10px 0;
-    color: var(--primary);
+// Discoursecord enhanced admin interface styles
+.discoursecord-admin {
+  h1 {
+    color: #333;
   }
   
-  .btn-primary {
-    background: var(--tertiary);
-    color: var(--secondary);
-    padding: 10px 15px;
+  .discoursecord-group-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .discoursecord-group-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    text-decoration: none;
-    display: inline-block;
-    margin-bottom: 5px;
-    
-    &:hover {
-      background: var(--tertiary-hover);
-      transform: translateY(-1px);
-    }
+    margin-bottom: 6px;
+    background: #f9f9f9;
   }
   
-  small {
-    color: var(--primary-med-or-secondary-med);
-    font-size: 0.9em;
+  .handle {
+    cursor: grab;
+    font-weight: bold;
+    width: 18px;
+    text-align: center;
+  }
+  
+  .group-key {
+    flex: 1;
+    font-family: monospace;
+  }
+  
+  .group-color {
+    width: 40px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    background: transparent;
+  }
+  
+  .btn-small {
+    line-height: 1;
+    padding: 3px 6px;
+    margin: 0 2px;
+  }
+  
+  .rankings-actions {
+    margin-top: 8px;
+  }
+  
+  .actions {
+    margin-top: 20px;
+  }
+  
+  .alert {
+    margin: 8px 0;
+    padding: 8px 10px;
+    border-radius: 4px;
+  }
+  
+  .alert-error {
+    background: #ffe6e6;
+    border: 1px solid #ffb3b3;
+  }
+  
+  .alert-info {
+    background: #e6f7ff;
+    border: 1px solid #b3e0ff;
   }
 }
 

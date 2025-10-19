@@ -6,7 +6,8 @@
 # url: https://github.com/Abaddon1979/Discoursecord
 # required_version: 2.7.0
 
-register_asset 'stylesheets/user-groups-injector.scss'
+# Register the stylesheet asset properly - use the correct path format
+register_asset 'stylesheets/user-groups-injector.scss', :desktop
 
 enabled_site_setting :discoursecord_enabled
 
