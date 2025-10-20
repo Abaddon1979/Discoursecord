@@ -75,6 +75,184 @@
   }
 }
 
+// Admin interface styles for group rankings and colors
+.admin-container {
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  h1 {
+    color: var(--primary);
+    margin-bottom: 20px;
+  }
+
+  .admin-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+  }
+
+  .group-rankings-section {
+    margin-bottom: 30px;
+
+    h2 {
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .description {
+      color: var(--primary-medium);
+      margin-bottom: 15px;
+    }
+
+    .group-list {
+      .group-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 15px;
+        border: 1px solid var(--primary-low);
+        border-radius: 8px;
+        margin-bottom: 10px;
+        background: var(--secondary);
+        transition: background-color 0.2s ease;
+
+        &:hover {
+          background: var(--primary-very-low);
+        }
+
+        .group-controls {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          .btn {
+            padding: 5px;
+            min-width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:disabled {
+              opacity: 0.5;
+              cursor: not-allowed;
+            }
+          }
+        }
+
+        .group-info {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          .group-name {
+            font-weight: 600;
+            color: var(--primary);
+          }
+
+          .group-rank {
+            font-size: 0.9em;
+            color: var(--primary-medium);
+          }
+        }
+
+        .color-picker-container {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          label {
+            font-weight: 500;
+            color: var(--primary);
+          }
+
+          .color-picker {
+            width: 40px;
+            height: 30px;
+            padding: 0;
+            border: 1px solid var(--primary-low);
+            border-radius: 4px;
+            cursor: pointer;
+          }
+
+          .color-value {
+            font-family: monospace;
+            font-size: 0.9em;
+            color: var(--primary-medium);
+            min-width: 70px;
+          }
+        }
+
+        .remove-group {
+          padding: 5px 10px;
+          background: var(--danger);
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+
+          &:hover {
+            background: var(--danger-hover);
+          }
+        }
+      }
+
+      .no-groups {
+        text-align: center;
+        padding: 40px;
+        color: var(--primary-medium);
+        border: 2px dashed var(--primary-low);
+        border-radius: 8px;
+      }
+    }
+  }
+
+  .preview-section {
+    h2 {
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .description {
+      color: var(--primary-medium);
+      margin-bottom: 15px;
+    }
+
+    .preview-examples {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .preview-item {
+        padding: 10px 15px;
+        border: 1px solid var(--primary-low);
+        border-radius: 6px;
+        background: var(--secondary);
+        font-weight: 500;
+
+        .preview-username {
+          font-weight: 600;
+        }
+
+        .preview-group {
+          font-size: 0.9em;
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+}
+
 // Base styles for group indicators
 .chat-message-info__username,
 a[data-user-card],

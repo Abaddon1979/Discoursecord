@@ -1,0 +1,101 @@
+<div class="admin-container">
+  <div class="content">
+    <h1>Discoursecord Settings</h1>
+    
+    <div class="admin-controls">
+      <button class="btn btn-primary" {{on "click" this.addNewGroup}}>
+        {{d-icon "plus"}}
+        Add New Group
+      </button>
+      <button 
+        class="btn btn-success" 
+        {{on "click" this.saveSettings}} 
+        disabled={{this.saving}}
+      >
+        {{#if this.saving}}
+          {{d-icon "spinner" class="spin"}}
+          Saving...
+        {{else}}
+          {{d-icon "check"}}
+          Save Settings
+        {{/if}}
+      </button>
+    </div>
+
+    <div class="group-rankings-section">
+      <h2>Group Rankings</h2>
+      <p class="description">
+        Groups are ranked from highest (top) to lowest (bottom). 
+        Users will be colored based on their highest-ranked group.
+      </p>
+
+      <div class="group-list">
+        {{#each this.groupRankings as |group index|}}
+          <div class="group-item" data-group="{{group}}">
+            <div class="group-controls">
+              <button 
+                class="btn btn-default move-up" 
+                {{on "click" (fn this.moveGroupUp index)}}
+                disabled={{eq index 0}}
+                title="Move up"
+              >
+                {{d-icon "arrow-up"}}
+              </button>
+              <button 
+                class="btn btn-default move-down" 
+                {{on "click" (fn this.moveGroupDown index)}}
+                disabled={{eq index (sub this.groupRankings.length 1)}}
+                title="Move down"
+              >
+                {{d-icon "arrow-down"}}
+              </button>
+            </div>
+
+            <div class="group-info">
+              <span class="group-name">{{group}}</span>
+              <span class="group-rank">Rank: {{add index 1}}</span>
+            </div>
+
+            <div class="color-picker-container">
+              <label>Color:</label>
+              <input 
+                type="color" 
+                value={{get this.groupColors group}} 
+                {{on "input" (fn this.updateGroupColor group)}}
+                class="color-picker"
+              />
+              <span class="color-value">{{get this.groupColors group}}</span>
+            </div>
+
+            <button 
+              class="btn btn-danger remove-group" 
+              {{on "click" (fn this.removeGroup group)}}
+              title="Remove group"
+            >
+              {{d-icon "trash-alt"}}
+            </button>
+          </div>
+        {{else}}
+          <div class="no-groups">
+            <p>No groups configured. Click "Add New Group" to get started.</p>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+
+    <div class="preview-section">
+      <h2>Preview</h2>
+      <p class="description">
+        This shows how users with different groups will appear:
+      </p>
+      <div class="preview-examples">
+        {{#each this.groupRankings as |group index|}}
+          <div class="preview-item" style="color: {{get this.groupColors group}};">
+            <span class="preview-username">@{{group}}_user</span>
+            <span class="preview-group">({{group}})</span>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
