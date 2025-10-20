@@ -14,16 +14,9 @@ enabled_site_setting :discoursecord_enabled
 # Admin UI entry under Plugins -> Discoursecord
 add_admin_route 'discoursecord.title', 'discoursecord'
 
-# Register the admin plugin controller and route
-module ::Discoursecord
-  class AdminController < ::Admin::AdminController
-    def index
-    end
-  end
-end
-
+# Register the admin plugin route
 Discourse::Application.routes.append do
-  get '/admin/plugins/discoursecord' => 'discoursecord/admin#index'
+  get '/admin/plugins/discoursecord' => 'admin/plugins#index'
 end
 
 after_initialize do
