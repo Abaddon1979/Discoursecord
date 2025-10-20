@@ -12,9 +12,19 @@ register_asset 'stylesheets/user-groups-injector.scss', :desktop
 enabled_site_setting :discoursecord_enabled
 
 # Admin UI entry under Plugins -> Discoursecord
-add_admin_route 'Discoursecord', 'discoursecord'
-# Remove standard settings from main interface to force use of custom admin
-# These settings will only be accessible through the custom admin interface
+add_admin_route 'discoursecord.title', 'discoursecord'
+
+# Register the admin plugin controller and route
+module ::Discoursecord
+  class AdminController < ::Admin::AdminController
+    def index
+    end
+  end
+end
+
+Discourse::Application.routes.append do
+  get '/admin/plugins/discoursecord' => 'discoursecord/admin#index'
+end
 
 after_initialize do
   # Add user groups to serialized user data
