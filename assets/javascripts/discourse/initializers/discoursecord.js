@@ -10,6 +10,34 @@ export default {
       if (userDataCache.has(username)) {
         return userDataCache.get(username);
       }
+
+      // Optimization: Check local Ember Data store first
+      // This avoids fetching data for users already loaded (e.g. in the topic stream)
+      try {
+        const store = window.Discourse?.__container__?.lookup("service:store");
+        if (store) {
+          const users = store.peekAll("user");
+          const user = users && users.findBy("username", username);
+
+          if (user) {
+            // Check if we have the custom fields injected by the plugin
+            // Ember objects use .get(), POJOs use .property
+            const groups = user.get ? user.get("user_groups") : user.user_groups;
+            const color = user.get ? user.get("group_color") : user.group_color;
+
+            // Only use if we actually have the groups data (it might be a partial user record)
+            if (groups) {
+              const data = { user_groups: groups, group_color: color };
+              userDataCache.set(username, data);
+              return data;
+            }
+          }
+        }
+      } catch (err) {
+        // Fallback to fetch if store lookup fails
+        console.debug("Discoursecord: Store lookup failed", err);
+      }
+
       try {
         const response = await fetch(`/u/${encodeURIComponent(username)}.json`);
         if (!response.ok) {
