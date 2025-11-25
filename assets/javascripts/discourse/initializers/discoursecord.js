@@ -6,14 +6,6 @@ export default {
   name: "discoursecord-groups",
   initialize(container) {
     withPluginApi("0.8.7", (api) => {
-      // Ensure the User model knows about our custom attributes
-      // This is necessary for Ember Data to retain these fields from the JSON payload
-      api.modifyClass("model:user", {
-        pluginId: "discoursecord",
-        user_groups: null,
-        group_color: null,
-      });
-
       // Cache for fetched user data (stores the final data)
       const userDataCache = new Map();
       // Cache for in-flight requests (stores promises to prevent duplicate concurrent fetches)
