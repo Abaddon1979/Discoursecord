@@ -14,62 +14,80 @@ export default {
         group_color: null,
       });
 
-      // Cache for fetched user data
+      // Cache for fetched user data (stores the final data)
       const userDataCache = new Map();
+      // Cache for in-flight requests (stores promises to prevent duplicate concurrent fetches)
+      const inflightRequests = new Map();
 
       async function fetchUserData(username) {
+        // Check data cache first
         if (userDataCache.has(username)) {
           return userDataCache.get(username);
         }
 
-        // Optimization: Check local Ember Data store first
-        try {
-          const store = container.lookup("service:store");
-          if (store) {
-            // peekAll returns a RecordArray, we can search it
-            // Note: findBy might be case-sensitive depending on Ember version, 
-            // but Discourse usernames are unique case-insensitive. 
-            // We try exact match first, then case-insensitive if needed? 
-            // Usually the store has the 'id' as username or 'username' property.
-            const users = store.peekAll("user");
-            let user = users.findBy("username", username);
-
-            if (!user) {
-              // Try case-insensitive search if exact match fails
-              user = users.find(u => u.username && u.username.toLowerCase() === username.toLowerCase());
-            }
-
-            if (user) {
-              // Ember objects use .get()
-              const groups = user.get("user_groups");
-              const color = user.get("group_color");
-
-              // Only use if we actually have the groups data
-              // (It might be null if the user was loaded by a serializer that didn't include it, 
-              // though we patched BasicUserSerializer so it should be there)
-              if (groups) {
-                const data = { user_groups: groups, group_color: color };
-                userDataCache.set(username, data);
-                // console.debug(`Discoursecord: Found ${username} in store`, data);
-                return data;
-              }
-            }
-          }
-        } catch (err) {
-          console.debug("Discoursecord: Store lookup failed", err);
+        // Check if we're already fetching this user
+        if (inflightRequests.has(username)) {
+          // console.debug(`Discoursecord: Already fetching ${username}, waiting for existing request`);
+          return await inflightRequests.get(username);
         }
 
-        // console.debug(`Discoursecord: Fetching ${username} from API`);
-        try {
-          const response = await fetch(`/u/${encodeURIComponent(username)}.json`);
-          if (!response.ok) {
+        // Create the fetch promise
+        const fetchPromise = (async () => {
+          try {
+            // Optimization: Check local Ember Data store first
+            const store = container.lookup("service:store");
+            if (store) {
+              const users = store.peekAll("user");
+              let user = users.findBy("username", username);
+
+              if (!user) {
+                // Try case-insensitive search if exact match fails
+                user = users.find(u => u.username && u.username.toLowerCase() === username.toLowerCase());
+              }
+
+              if (user) {
+                // Ember objects use .get()
+                const groups = user.get("user_groups");
+                const color = user.get("group_color");
+
+                // Only use if we actually have the groups data
+                if (groups) {
+                  const data = { user_groups: groups, group_color: color };
+                  userDataCache.set(username, data);
+                  // console.debug(`Discoursecord: Found ${username} in store`, data);
+                  return data;
+                }
+              }
+            }
+          } catch (err) {
+            console.debug("Discoursecord: Store lookup failed", err);
+          }
+
+          // Fallback to API fetch
+          // console.debug(`Discoursecord: Fetching ${username} from API`);
+          try {
+            const response = await fetch(`/u/${encodeURIComponent(username)}.json`);
+            if (!response.ok) {
+              return null;
+            }
+            const data = await response.json();
+            const userData = data.user;
+            userDataCache.set(username, userData);
+            return userData;
+          } catch {
             return null;
           }
-          const data = await response.json();
-          userDataCache.set(username, data.user);
-          return data.user;
-        } catch {
-          return null;
+        })();
+
+        // Store the promise
+        inflightRequests.set(username, fetchPromise);
+
+        try {
+          const result = await fetchPromise;
+          return result;
+        } finally {
+          // Clean up the inflight request after it completes
+          inflightRequests.delete(username);
         }
       }
 
