@@ -19,6 +19,37 @@ export default {
       // Cache for in-flight requests (stores promises to prevent duplicate concurrent fetches)
       const inflightRequests = new Map();
 
+      // Rate limiting to prevent overwhelming the server
+      let fetchQueue = Promise.resolve();
+      let activeFetches = 0;
+      const MAX_CONCURRENT_FETCHES = 3;
+      const FETCH_DELAY_MS = 100; // Delay between fetches
+
+      function queueFetch(fetchFunction) {
+        return new Promise((resolve, reject) => {
+          const executeWhenReady = async () => {
+            // Wait if we're at max concurrent fetches
+            while (activeFetches >= MAX_CONCURRENT_FETCHES) {
+              await new Promise(r => setTimeout(r, 50));
+            }
+
+            activeFetches++;
+            try {
+              const result = await fetchFunction();
+              // Add delay before next fetch
+              await new Promise(r => setTimeout(r, FETCH_DELAY_MS));
+              resolve(result);
+            } catch (error) {
+              reject(error);
+            } finally {
+              activeFetches--;
+            }
+          };
+
+          fetchQueue = fetchQueue.then(executeWhenReady, executeWhenReady);
+        });
+      }
+
       async function fetchUserData(username) {
         // Check data cache first
         if (userDataCache.has(username)) {
@@ -27,44 +58,14 @@ export default {
 
         // Check if we're already fetching this user
         if (inflightRequests.has(username)) {
-          // console.debug(`Discoursecord: Already fetching ${username}, waiting for existing request`);
+          console.debug(`Discoursecord: Already fetching ${username}, waiting for existing request`);
           return await inflightRequests.get(username);
         }
 
-        // Create the fetch promise
-        const fetchPromise = (async () => {
-          try {
-            // Optimization: Check local Ember Data store first
-            const store = container.lookup("service:store");
-            if (store) {
-              const users = store.peekAll("user");
-              let user = users.findBy("username", username);
-
-              if (!user) {
-                // Try case-insensitive search if exact match fails
-                user = users.find(u => u.username && u.username.toLowerCase() === username.toLowerCase());
-              }
-
-              if (user) {
-                // Ember objects use .get()
-                const groups = user.get("user_groups");
-                const color = user.get("group_color");
-
-                // Only use if we actually have the groups data
-                if (groups) {
-                  const data = { user_groups: groups, group_color: color };
-                  userDataCache.set(username, data);
-                  // console.debug(`Discoursecord: Found ${username} in store`, data);
-                  return data;
-                }
-              }
-            }
-          } catch (err) {
-            console.debug("Discoursecord: Store lookup failed", err);
-          }
-
-          // Fallback to API fetch
-          // console.debug(`Discoursecord: Fetching ${username} from API`);
+        // Create the fetch promise with rate limiting
+        const fetchPromise = queueFetch(async () => {
+          // Fetch from API
+          console.debug(`Discoursecord: Fetching ${username} from API`);
           try {
             const response = await fetch(`/u/${encodeURIComponent(username)}.json`);
             if (!response.ok) {
@@ -77,7 +78,7 @@ export default {
           } catch {
             return null;
           }
-        })();
+        });
 
         // Store the promise
         inflightRequests.set(username, fetchPromise);
