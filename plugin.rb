@@ -19,7 +19,22 @@ Discourse::Application.routes.append do
   get '/admin/plugins/discoursecord' => 'admin/plugins#index'
 end
 
+# Register cache endpoint
+Discourse::Application.routes.append do
+  get '/discoursecord/user-cache' => 'discoursecord/cache#user_cache'
+end
+
 after_initialize do
+  # Load the cache controller and job
+  require_relative 'lib/user_groups_injector/cache_controller'
+  require_relative 'lib/user_groups_injector/build_discoursecord_cache'
+
+  # Build initial cache if it doesn't exist
+  cache_path = File.join(Rails.root, 'plugins', 'Discoursecord', 'user-cache.json')
+  unless File.exist?(cache_path)
+    Jobs.enqueue(:build_discoursecord_cache)
+  end
+
   # Add user groups to serialized user data
   add_to_serializer(:basic_user, :user_groups) do
     groups =

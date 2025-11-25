@@ -19,6 +19,45 @@ export default {
       // Cache for in-flight requests (stores promises to prevent duplicate concurrent fetches)
       const inflightRequests = new Map();
 
+      // Server-side cache data
+      let serverCacheLoaded = false;
+      let serverCacheLoadPromise = null;
+
+      // Load user cache from server
+      async function loadServerCache() {
+        if (serverCacheLoaded) return;
+
+        if (serverCacheLoadPromise) {
+          return serverCacheLoadPromise;
+        }
+
+        serverCacheLoadPromise = (async () => {
+          try {
+            console.debug('Discoursecord: Loading user cache from server...');
+            const response = await fetch('/discoursecord/user-cache.json');
+            if (!response.ok) {
+              console.warn('Discoursecord: Failed to load cache from server');
+              return;
+            }
+
+            const data = await response.json();
+
+            if (data.users) {
+              // Populate cache with server data
+              for (const [username, userData] of Object.entries(data.users)) {
+                userDataCache.set(username.toLowerCase(), userData);
+              }
+              console.log(`Discoursecord: Loaded ${Object.keys(data.users).length} users from cache (generated ${new Date(data.generated_at * 1000).toLocaleString()})`);
+              serverCacheLoaded = true;
+            }
+          } catch (error) {
+            console.error('Discoursecord: Error loading cache:', error);
+          }
+        })();
+
+        return serverCacheLoadPromise;
+      }
+
       // Rate limiting to prevent overwhelming the server
       let fetchQueue = Promise.resolve();
       let activeFetches = 0;
@@ -232,9 +271,15 @@ export default {
         debounceTimeout = setTimeout(injectUserGroups, 500);
       }
 
-      // Initial kick - run immediately and again after short delay
-      injectUserGroups();
-      setTimeout(injectUserGroups, 300);
+      // Initial kick - load cache from server, then inject
+      (async () => {
+        await loadServerCache();
+        injectUserGroups();
+      })();
+      setTimeout(async () => {
+        await loadServerCache();
+        injectUserGroups();
+      }, 300);
 
       // Observe DOM changes for chat, links, avatars
       const observer = new MutationObserver((mutations) => {
