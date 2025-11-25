@@ -82,15 +82,18 @@ export default {
       }
 
       async function fetchUserData(username) {
+        // Normalize username to lowercase for cache lookup
+        const normalizedUsername = username.toLowerCase();
+
         // Check data cache first
-        if (userDataCache.has(username)) {
-          return userDataCache.get(username);
+        if (userDataCache.has(normalizedUsername)) {
+          return userDataCache.get(normalizedUsername);
         }
 
         // Check if we're already fetching this user
-        if (inflightRequests.has(username)) {
+        if (inflightRequests.has(normalizedUsername)) {
           console.debug(`Discoursecord: Already fetching ${username}, waiting for existing request`);
-          return await inflightRequests.get(username);
+          return await inflightRequests.get(normalizedUsername);
         }
 
         // Create the fetch promise with rate limiting
@@ -104,7 +107,7 @@ export default {
             }
             const data = await response.json();
             const userData = data.user;
-            userDataCache.set(username, userData);
+            userDataCache.set(normalizedUsername, userData);
             return userData;
           } catch {
             return null;
@@ -112,14 +115,14 @@ export default {
         });
 
         // Store the promise
-        inflightRequests.set(username, fetchPromise);
+        inflightRequests.set(normalizedUsername, fetchPromise);
 
         try {
           const result = await fetchPromise;
           return result;
         } finally {
           // Clean up the inflight request after it completes
-          inflightRequests.delete(username);
+          inflightRequests.delete(normalizedUsername);
         }
       }
 
