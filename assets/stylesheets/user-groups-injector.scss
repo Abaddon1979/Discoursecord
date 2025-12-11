@@ -6,13 +6,13 @@
   h1 {
     color: #333;
   }
-  
+
   .discoursecord-group-list {
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  
+
   .discoursecord-group-item {
     display: flex;
     align-items: center;
@@ -23,19 +23,19 @@
     margin-bottom: 6px;
     background: #f9f9f9;
   }
-  
+
   .handle {
     cursor: grab;
     font-weight: bold;
     width: 18px;
     text-align: center;
   }
-  
+
   .group-key {
     flex: 1;
     font-family: monospace;
   }
-  
+
   .group-color {
     width: 40px;
     height: 28px;
@@ -43,32 +43,32 @@
     border: none;
     background: transparent;
   }
-  
+
   .btn-small {
     line-height: 1;
     padding: 3px 6px;
     margin: 0 2px;
   }
-  
+
   .rankings-actions {
     margin-top: 8px;
   }
-  
+
   .actions {
     margin-top: 20px;
   }
-  
+
   .alert {
     margin: 8px 0;
     padding: 8px 10px;
     border-radius: 4px;
   }
-  
+
   .alert-error {
     background: #ffe6e6;
     border: 1px solid #ffb3b3;
   }
-  
+
   .alert-info {
     background: #e6f7ff;
     border: 1px solid #b3e0ff;
@@ -92,7 +92,7 @@
     display: flex;
     gap: 10px;
     margin-bottom: 30px;
-    
+
     .btn {
       display: flex;
       align-items: center;
@@ -259,7 +259,7 @@ a[data-user-card],
 .avatar[data-user-card] {
   // Smooth transitions for color changes
   transition: color 0.3s ease, border-color 0.3s ease;
-  
+
   // Group-specific styles will be added dynamically
 }
 
@@ -325,20 +325,20 @@ a[data-user-card],
 // Chat message specific styles
 .chat-message-info__username {
   position: relative;
-  
+
   // Add small indicators for groups
   &.is-admin::after {
     content: "👑";
     margin-left: 4px;
     font-size: 0.8em;
   }
-  
+
   &.is-moderator::after {
     content: "🛡️";
     margin-left: 4px;
     font-size: 0.8em;
   }
-  
+
   &.is-staff::after {
     content: "⭐";
     margin-left: 4px;
@@ -349,18 +349,18 @@ a[data-user-card],
 // User link specific styles
 a[data-user-card] {
   text-decoration: none;
-  
+
   &:hover {
     text-decoration: underline;
   }
-  
+
   // Add subtle background for group indicators
   &.is-admin,
   &.is-moderator,
   &.is-staff {
     padding: 1px 4px;
     border-radius: 3px;
-    
+
     &:hover {
       opacity: 0.8;
     }
@@ -370,12 +370,12 @@ a[data-user-card] {
 // Avatar specific styles
 .avatar[data-user-card] {
   box-sizing: border-box;
-  
+
   // Ensure border doesn't break layout
   &:not(.size-large) {
     border-radius: 50%;
   }
-  
+
   &.size-large {
     border-radius: 8%;
   }
@@ -384,6 +384,7 @@ a[data-user-card] {
 // Dark theme adjustments
 .discourse-dark-theme,
 .ember-application.is-dark-theme {
+
   .chat-message-info__username,
   a[data-user-card] {
     // Reduce intensity of colors in dark theme
@@ -393,6 +394,7 @@ a[data-user-card] {
 
 // High contrast mode
 @media (prefers-contrast: high) {
+
   .chat-message-info__username,
   a[data-user-card] {
     border-bottom: 2px solid currentColor;
@@ -401,6 +403,7 @@ a[data-user-card] {
 
 // Reduced motion
 @media (prefers-reduced-motion: reduce) {
+
   .chat-message-info__username,
   a[data-user-card],
   .avatar[data-user-card] {
@@ -410,6 +413,7 @@ a[data-user-card] {
 
 // Print styles
 @media print {
+
   .chat-message-info__username::after,
   a[data-user-card::after {
     // Hide emoji indicators in print
@@ -423,7 +427,7 @@ a[data-user-card] {
     font-size: 0.7em;
     margin-left: 2px;
   }
-  
+
   a[data-user-card] {
     padding: 0 2px;
   }
@@ -442,7 +446,7 @@ a[data-user-card] {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.2s ease;
-  
+
   &.visible {
     opacity: 1;
   }
@@ -451,7 +455,7 @@ a[data-user-card] {
 // Loading states
 .user-groups-loading {
   opacity: 0.6;
-  
+
   &::after {
     content: "...";
     animation: loading-dots 1.5s infinite;
@@ -459,9 +463,20 @@ a[data-user-card] {
 }
 
 @keyframes loading-dots {
-  0%, 20% { content: "."; }
-  40% { content: ".."; }
-  60%, 100% { content: "..."; }
+
+  0%,
+  20% {
+    content: ".";
+  }
+
+  40% {
+    content: "..";
+  }
+
+  60%,
+  100% {
+    content: "...";
+  }
 }
 
 // Error states
@@ -476,8 +491,13 @@ a[data-user-card] {
 }
 
 @keyframes highlight-success {
-  0% { background-color: var(--success-low); }
-  100% { background-color: transparent; }
+  0% {
+    background-color: var(--success-low);
+  }
+
+  100% {
+    background-color: transparent;
+  }
 }
 
 // Group badge styles
@@ -492,22 +512,22 @@ a[data-user-card] {
   letter-spacing: 0.5px;
   vertical-align: middle;
   white-space: nowrap;
-  
+
   // Default background
   background-color: var(--primary-low);
   color: var(--primary-high);
-  
+
   // Specific group styles can be added dynamically
   &.is-admin {
     background-color: #e74c3c;
     color: white;
   }
-  
+
   &.is-moderator {
     background-color: #3498db;
     color: white;
   }
-  
+
   &.is-staff {
     background-color: #f39c12;
     color: white;
@@ -518,19 +538,9 @@ a[data-user-card] {
 .compact-chat {
   .chat-message-info__username {
     font-size: 0.9em;
-    
+
     &::after {
       font-size: 0.7em;
     }
-  }
-}
-
-// Chat GIF Resizing
-// Increase size of GIFs in chat by 3x
-.chat-message,
-.chat-message-container,
-.chat-message-text {
-  img[src*=".gif"] {
-    zoom: 3; 
   }
 }
