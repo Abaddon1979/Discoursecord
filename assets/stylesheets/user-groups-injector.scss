@@ -411,7 +411,7 @@ a[data-user-card] {
 // Print styles
 @media print {
   .chat-message-info__username::after,
-  a[data-user-card]::after {
+  a[data-user-card::after {
     // Hide emoji indicators in print
     display: none;
   }
@@ -522,5 +522,15 @@ a[data-user-card] {
     &::after {
       font-size: 0.7em;
     }
+  }
+}
+
+// Chat GIF Resizing
+// Increase size of GIFs in chat by 3x
+.chat-message,
+.chat-message-container,
+.chat-message-text {
+  img[src*=".gif"] {
+    zoom: 3; 
   }
 }
