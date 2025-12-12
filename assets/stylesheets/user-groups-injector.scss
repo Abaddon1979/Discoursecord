@@ -415,7 +415,7 @@ a[data-user-card] {
 @media print {
 
   .chat-message-info__username::after,
-  a[data-user-card::after {
+  a[data-user-card]::after {
     // Hide emoji indicators in print
     display: none;
   }
